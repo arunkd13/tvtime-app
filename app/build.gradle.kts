@@ -16,7 +16,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
     }
 
     buildTypes {
@@ -49,16 +48,20 @@ android {
 }
 
 dependencies {
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
-    implementation(platform(libs.compose.bom))
+
+    implementation(libs.ui.android)
     implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
+    androidTestImplementation(libs.ui.test.junit4)
+
+    implementation(libs.compose.runtime)
+
     implementation(libs.tv.foundation)
     implementation(libs.tv.material)
-    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
-    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)

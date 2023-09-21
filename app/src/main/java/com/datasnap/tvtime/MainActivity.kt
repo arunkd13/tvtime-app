@@ -4,45 +4,42 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.tv.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Surface
-import com.datasnap.tvtime.ui.theme.TVTimeTheme
+import com.datasnap.tvtime.ui.components.TvTimeTabRow
+import com.datasnap.tvtime.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalTvMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TVTimeTheme {
+            AppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     shape = RectangleShape
                 ) {
-                    Greeting("Android")
+                    App()
                 }
             }
         }
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TVTimeTheme {
-        Greeting("Android")
+fun App() {
+    var selectedTabIndex by remember {
+        mutableIntStateOf(0)
     }
+    TvTimeTabRow(
+        tabs = listOf("One", "Two", "Three"),
+        selectedTabIndex = selectedTabIndex,
+        onTabSelected = { i -> selectedTabIndex = i })
 }
